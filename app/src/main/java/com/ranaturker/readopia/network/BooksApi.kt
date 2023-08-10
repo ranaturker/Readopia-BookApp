@@ -5,7 +5,7 @@ import retrofit2.http.GET
 
 interface BooksApi {
     @GET("books")
-    fun getBooks(): Call<List<Books>>
+    fun getBooks(): Call<Books>
     @GET("books/?id")
     fun getBooksWithId(): Call<List<Books>>
 }
