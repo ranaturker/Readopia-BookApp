@@ -6,10 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.ranaturker.readopia.databinding.FragmentListBinding
+import com.ranaturker.readopia.network.Result
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), BookAdapter.RecyclerViewEvent {
     private lateinit var binding: FragmentListBinding
+    private lateinit var bookAdapter: BookAdapter
     private val viewModel: ListViewModel by viewModels()
 
     override fun onCreateView(
@@ -23,8 +26,21 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        bookAdapter = BookAdapter(emptyList(), this@ListFragment)
+        recyclerView.adapter = bookAdapter
 
         viewModel.getBooks()
+        viewModel.books.observe(viewLifecycleOwner) { books ->
+            if (books != null) {
+                bookAdapter.updateData(books)
+            }
+
+        }
+    }
+
+    override fun onItemClick(data: Result?) {
+        TODO("Not yet implemented")
     }
 }
 
