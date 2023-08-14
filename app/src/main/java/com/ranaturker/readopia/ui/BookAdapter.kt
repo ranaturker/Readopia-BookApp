@@ -1,5 +1,6 @@
 package com.ranaturker.readopia.ui
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,12 +28,12 @@ class BookAdapter(
         return bookList?.size!!
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateData(newList: List<Result?>?) {
         bookList = newList
         notifyDataSetChanged()
     }
     inner class BookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
         private val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
 
         init {
