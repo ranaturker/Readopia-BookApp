@@ -40,7 +40,12 @@ class BookAdapter(
             itemView.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    listener.onItemClick(bookList?.get(position))
+                   if( bookList?.get(position)?.id!=null) {
+                       listener.onItemClick(bookList?.get(position)?.id!!)
+                    }
+                    else{
+                       listener.onItemClick(-1)
+                   }
                 }
             }
         }
@@ -52,6 +57,6 @@ class BookAdapter(
     }
 
     interface RecyclerViewEvent {
-        fun onItemClick(data: Result?)
+        fun onItemClick(bookId: Int)
     }
 }

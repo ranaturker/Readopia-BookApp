@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ranaturker.readopia.databinding.FragmentListBinding
 import com.ranaturker.readopia.network.Result
@@ -39,8 +40,8 @@ class ListFragment : Fragment(), BookAdapter.RecyclerViewEvent {
         }
     }
 
-    override fun onItemClick(data: Result?) {
-        TODO("Not yet implemented")
+    override fun onItemClick(bookId: Int) {
+        findNavController().navigate(ListFragmentDirections.actionListFragmentToDetailFragment(bookId))
     }
 }
 
