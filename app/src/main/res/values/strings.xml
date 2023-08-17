@@ -3,4 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="readopia">READOPIA</string>
+    <string name="name">name</string>
+    <string name="button">button</string>
+    <string name="read">Read</string>
 </resources>

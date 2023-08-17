@@ -20,7 +20,7 @@ class ListFragment : Fragment(), BookAdapter.RecyclerViewEvent {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentListBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -36,12 +36,15 @@ class ListFragment : Fragment(), BookAdapter.RecyclerViewEvent {
             if (books != null) {
                 bookAdapter.updateData(books)
             }
-
         }
     }
 
     override fun onItemClick(bookId: Int) {
-        findNavController().navigate(ListFragmentDirections.actionListFragmentToDetailFragment(bookId))
+        findNavController().navigate(
+            ListFragmentDirections.actionListFragmentToDetailFragment(
+                bookId
+            )
+        )
     }
 }
 
