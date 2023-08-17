@@ -39,7 +39,7 @@ class DetailFragment : Fragment() {
 
                 binding.button.setOnClickListener {
                     val action = DetailFragmentDirections.actionDetailFragmentToReadingFragment(
-                        book.formats?.textplainCharsetusAscii?:""
+                        book.formats?.textplain?:""
                     )
                     findNavController().navigate(action)
                 }

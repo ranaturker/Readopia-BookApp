@@ -1,12 +1,18 @@
 package com.ranaturker.readopia.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.ranaturker.readopia.databinding.FragmentReadingBinding
+import com.ranaturker.readopia.network.BooksApiService
+import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ReadingFragment : Fragment() {
     private lateinit var binding: FragmentReadingBinding
@@ -24,7 +30,25 @@ class ReadingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val url = ReadingFragmentArgs.fromBundle(requireArguments()).url
-        binding.urlTextView.text = url.toString()
+        val url = args.url
+        loadAndDisplayContent(url)
+    }
+
+    private fun loadAndDisplayContent(url: String) {
+        val textView = binding.urlTextView
+
+        val call = BooksApiService.api.getBookContent(url)
+        call.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()?.string() ?: ""
+                    textView.text = responseBody
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Log.e("error", "Error: ${t.message}")
+            }
+        })
     }
 }
