@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebChromeClient
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.navigation.fragment.navArgs
 import com.ranaturker.readopia.databinding.FragmentReadingBinding
 import com.ranaturker.readopia.network.BooksApiService
@@ -31,7 +34,7 @@ class ReadingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val url = args.url
-        loadAndDisplayContent(url)
+        loadWebView(url)
     }
 
     private fun loadAndDisplayContent(url: String) {
@@ -50,5 +53,28 @@ class ReadingFragment : Fragment() {
                 Log.e("error", "Error: ${t.message}")
             }
         })
+    }
+
+    private fun loadWebView(url: String) {
+        with(binding.webView) {
+            settings.javaScriptEnabled = true
+            // Load a URL
+            loadUrl(url)
+            // Set a WebViewClient to handle navigation inside the WebView
+            webViewClient = object : WebViewClient() {
+                override fun shouldOverrideUrlLoading(view: WebView?, url: String): Boolean {
+                    view?.loadUrl(url)
+                    return true
+                }
+            }
+            webChromeClient = object : WebChromeClient() {
+                override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                    binding.TextViewLoading.text = "Page loading : $newProgress%"
+                    if (newProgress == 100) {
+                        binding.TextViewLoading.visibility = View.GONE
+                    }
+                }
+            }
+        }
     }
 }

@@ -12,18 +12,16 @@ data class Books(
     @SerializedName("results")
     val results: List<Result?>? = null
 )
+
 data class Formats(
     @SerializedName("image/jpeg")
-    val imagejpeg: String? = null,
-    @SerializedName("text/plain")
-    val textplain: String? = null,
-    @SerializedName("text/plain; charset=iso-8859-1")
-    val textplainCharsetiso88591: String? = null,
-    @SerializedName("text/plain; charset=us-ascii")
-    val textplainCharsetusAscii: String? = null,
-    @SerializedName("text/plain; charset=utf-8")
-    val textplainCharsetutf8: String? = null
+    val imageJpeg: String? = null,
+    @SerializedName("text/html")
+    val textHtml: String? = null,
+    @SerializedName("text/html; charset=utf-8")
+    val textHtmlUtf8: String? = null,
 )
+
 data class Author(
     @SerializedName("birth_year")
     val birthYear: Int? = null,
@@ -32,6 +30,7 @@ data class Author(
     @SerializedName("name")
     val name: String? = null
 )
+
 data class Result(
     @SerializedName("authors")
     val authors: List<Author?>? = null,
@@ -56,6 +55,7 @@ data class Result(
     @SerializedName("translators")
     val translators: List<Translator?>? = null
 )
+
 data class Translator(
     @SerializedName("name")
     val name: String? = null

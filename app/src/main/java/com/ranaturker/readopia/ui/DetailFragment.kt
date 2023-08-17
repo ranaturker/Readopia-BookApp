@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -38,14 +39,28 @@ class DetailFragment : Fragment() {
                 binding.name.text = book.title
 
                 binding.button.setOnClickListener {
-                    val action = DetailFragmentDirections.actionDetailFragmentToReadingFragment(
-                        book.formats?.textplain?:""
-                    )
-                    findNavController().navigate(action)
+                    if (book.formats?.textHtmlUtf8 != null) {
+                        val action =
+                            DetailFragmentDirections.actionDetailFragmentToReadingFragment(
+                                book.formats.textHtmlUtf8
+                            )
+                        findNavController().navigate(action)
+                    } else if (book.formats?.textHtml != null) {
+                        val action =
+                            DetailFragmentDirections.actionDetailFragmentToReadingFragment(
+                                book.formats.textHtml
+                            )
+                        findNavController().navigate(action)
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            "There is no reading page.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             }
         }
-
     }
 
 }
