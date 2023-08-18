@@ -8,13 +8,15 @@
 
     <Button
         android:id="@+id/button"
-        android:text="@string/read_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="@dimen/margin_32"
-        android:layout_marginBottom="@dimen/margin_32" />
+        android:layout_marginBottom="@dimen/margin_32"
+        android:backgroundTint="@color/background"
+        android:text="@string/read_button"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/name"
