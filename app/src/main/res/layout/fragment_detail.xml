@@ -8,23 +8,23 @@
 
     <Button
         android:id="@+id/button"
-        android:text="@string/read"
+        android:text="@string/read_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"/>
+        android:layout_marginEnd="@dimen/margin_32"
+        android:layout_marginBottom="@dimen/margin_32"/>
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/margin_12"
         android:gravity="center"
-        android:text="@string/name"
+        android:text="@string/book_name"
         android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="@dimen/text_size_30"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -10,8 +10,8 @@
         android:id="@+id/readopia"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="16dp"
-        android:text="@string/readopia"
+        android:layout_marginTop="@dimen/margin_16"
+        android:text="@string/readopia_app_name"
         android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView

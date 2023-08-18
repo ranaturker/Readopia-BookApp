@@ -15,5 +15,4 @@ interface BooksApi {
 
     @GET
     fun getBookContent(@Url contentUrl: String): Call<ResponseBody>
-
 }

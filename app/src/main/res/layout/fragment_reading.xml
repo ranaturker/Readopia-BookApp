@@ -7,20 +7,20 @@
     tools:context=".ui.ReadingFragment">
 
     <WebView
-        android:id="@+id/webView"
+        android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <TextView
-        android:id="@+id/TextViewLoading"
+        android:id="@+id/text_view_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:textSize="10sp"
-        app:layout_constraintBottom_toBottomOf="@+id/webView"
-        app:layout_constraintEnd_toEndOf="@+id/webView"
+        android:textSize="@dimen/text_size_12"
+        app:layout_constraintBottom_toBottomOf="@+id/web_view"
+        app:layout_constraintEnd_toEndOf="@+id/web_view"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/webView"
+        app:layout_constraintTop_toTopOf="@+id/web_view"
         tools:text="text" />
 
     <ScrollView
@@ -33,11 +33,11 @@
         app:layout_constraintVertical_chainStyle="packed">
 
         <TextView
-            android:id="@+id/urlTextView"
+            android:id="@+id/url_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:textSize="10sp"
+            android:textSize="@dimen/text_size_12"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="text" />
