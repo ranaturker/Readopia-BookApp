@@ -69,9 +69,9 @@ class ReadingFragment : Fragment() {
             }
             webChromeClient = object : WebChromeClient() {
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
-                    binding.TextViewLoading.text = "Page loading : $newProgress%"
+                    binding.textViewLoading.text = "Page loading : $newProgress%"
                     if (newProgress == 100) {
-                        binding.TextViewLoading.visibility = View.GONE
+                        binding.textViewLoading.visibility = View.GONE
                     }
                 }
             }
