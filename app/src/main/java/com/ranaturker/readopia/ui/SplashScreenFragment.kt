@@ -23,6 +23,6 @@ class SplashScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Handler(Looper.getMainLooper()).postDelayed({
             findNavController().navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToListFragment())
-        }, 4561)
+        }, 3461)
     }
 }
