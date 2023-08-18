@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/listFragment">
+    app:startDestination="@id/splashScreenFragment">
 
     <fragment
         android:id="@+id/listFragment"
@@ -19,6 +19,7 @@
         android:name="com.ranaturker.readopia.ui.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail">
+        <!--suppress NavigationFile -->
         <argument
             android:name="bookId"
             app:argType="integer" />
@@ -31,8 +32,18 @@
         android:name="com.ranaturker.readopia.ui.ReadingFragment"
         android:label="fragment_reading"
         tools:layout="@layout/fragment_reading">
+        <!--suppress NavigationFile -->
         <argument
             android:name="url"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.ranaturker.readopia.ui.SplashScreenFragment"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreenFragment_to_listFragment"
+            app:destination="@id/listFragment" />
     </fragment>
 </navigation>

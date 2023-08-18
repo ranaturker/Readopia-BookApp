@@ -4,6 +4,6 @@
     <string name="readopia_app_name">READOPIA</string>
     <string name="name">name</string>
     <string name="button">button</string>
-    <string name="book_name"/>
+    <string name="book_name" />
     <string name="read_button">Read</string>
 </resources>
