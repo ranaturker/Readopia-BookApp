@@ -10,7 +10,7 @@ data class Books(
     @SerializedName("previous")
     val previous: Any? = null,
     @SerializedName("results")
-    val results: List<Result?>? = null
+    val results: List<Result>? = null
 )
 
 data class Formats(

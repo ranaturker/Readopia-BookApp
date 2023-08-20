@@ -37,24 +37,6 @@ class ReadingFragment : Fragment() {
         loadWebView(url)
     }
 
-    private fun loadAndDisplayContent(url: String) {
-        val textView = binding.urlTextView
-
-        val call = BooksApiService.api.getBookContent(url)
-        call.enqueue(object : Callback<ResponseBody> {
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                if (response.isSuccessful) {
-                    val responseBody = response.body()?.string() ?: ""
-                    textView.text = responseBody
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Log.e("error", "Error: ${t.message}")
-            }
-        })
-    }
-
     private fun loadWebView(url: String) {
         with(binding.webView) {
             settings.javaScriptEnabled = true
@@ -69,9 +51,9 @@ class ReadingFragment : Fragment() {
             }
             webChromeClient = object : WebChromeClient() {
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
-                    binding.textViewLoading.text = "Page loading : $newProgress%"
+                    binding.progress.progress = newProgress
                     if (newProgress == 100) {
-                        binding.textViewLoading.visibility = View.GONE
+                        binding.progress.visibility = View.GONE
                     }
                 }
             }

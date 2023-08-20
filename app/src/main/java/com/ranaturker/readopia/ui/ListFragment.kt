@@ -1,6 +1,7 @@
 package com.ranaturker.readopia.ui
 
 import android.os.Bundle
+import android.provider.Contacts.Intents.UI
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ranaturker.readopia.databinding.FragmentListBinding
-import com.ranaturker.readopia.network.Result
 
 class ListFragment : Fragment(), BookAdapter.RecyclerViewEvent {
     private lateinit var binding: FragmentListBinding
@@ -32,9 +32,18 @@ class ListFragment : Fragment(), BookAdapter.RecyclerViewEvent {
         recyclerView.adapter = bookAdapter
 
         viewModel.getBooks()
-        viewModel.books.observe(viewLifecycleOwner) { books ->
+        viewModel.uiState.observe(viewLifecycleOwner) { books ->
             if (books != null) {
-                bookAdapter.updateData(books)
+                when (books) {
+                    UIState.Loading -> {
+                        repeat(61) { index ->
+                            binding.progressIndicator.progress = index
+                        }
+                    }
+                    is UIState.Success -> {
+                        bookAdapter.updateData(books.data)
+                    }
+                }
             }
         }
     }

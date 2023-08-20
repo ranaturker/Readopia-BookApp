@@ -14,11 +14,12 @@ import retrofit2.Response
 
 class ListViewModel : ViewModel() {
 
-    val booksLiveData = MutableLiveData<List<Result?>?>()
-    val books: LiveData<List<Result?>?> = booksLiveData
+    private val _uiState = MutableLiveData<UIState>()
+    val uiState: LiveData<UIState> = _uiState
 
     fun getBooks() {
         viewModelScope.launch {
+            _uiState.postValue(UIState.Loading)
             BooksApiService.api.getBooks().enqueue(object : retrofit2.Callback<Books> {
                 override fun onResponse(
                     call: Call<Books>,
@@ -27,7 +28,7 @@ class ListViewModel : ViewModel() {
                     if (response.isSuccessful) {
                         val books = response.body()
                         if (books != null) {
-                            booksLiveData.postValue(books.results)
+                            _uiState.postValue(UIState.Success(data = books.results.orEmpty()))
                         }
                         if (books != null) {
                             Log.d("ranad", books.results.toString())
@@ -43,4 +44,9 @@ class ListViewModel : ViewModel() {
             })
         }
     }
+}
+
+sealed class UIState {
+    object Loading : UIState()
+    data class Success(val data: List<Result>) : UIState()
 }
