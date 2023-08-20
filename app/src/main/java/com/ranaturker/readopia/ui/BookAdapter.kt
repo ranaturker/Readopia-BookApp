@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.ranaturker.readopia.R
 import com.ranaturker.readopia.network.Result
 
@@ -37,6 +39,7 @@ class BookAdapter(
 
     inner class BookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
+        private val imageViewBook: ImageFilterView = itemView.findViewById(R.id.imageViewBook)
 
         init {
             itemView.setOnClickListener {
@@ -53,6 +56,10 @@ class BookAdapter(
         fun bind(book: Result?) {
             if (book != null) {
                 nameTextView.text = book.title
+                imageViewBook.load(book.formats?.imageJpeg){
+                    placeholder(R.drawable.book_wallpaper)
+                    error(R.drawable.ic_error_image)
+                }
             }
         }
     }
