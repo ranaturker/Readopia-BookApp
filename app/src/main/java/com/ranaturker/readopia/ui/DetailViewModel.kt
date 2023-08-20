@@ -15,9 +15,12 @@ import retrofit2.Response
 class DetailViewModel: ViewModel() {
     val bookLiveData = MutableLiveData<Result?>()
     val book: LiveData<Result?> = bookLiveData
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
 
     fun getBookWithId(id : Int) {
         viewModelScope.launch {
+            _isLoading.postValue(true)
             BooksApiService.api.getBookWithId(id).enqueue(object : retrofit2.Callback<Books> {
                 override fun onResponse(
                     call: Call<Books>,
@@ -34,10 +37,13 @@ class DetailViewModel: ViewModel() {
                     } else {
                         Log.e("failed", "Failed to fetch books: ${response.code()}")
                     }
+                    _isLoading.postValue(false)
                 }
 
                 override fun onFailure(call: Call<Books>, t: Throwable) {
                     Log.e("error", "Error: ${t.message}")
+
+                    _isLoading.postValue(false)
                 }
             })
         }

@@ -1,6 +1,8 @@
 package com.ranaturker.readopia.ui
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,7 +28,7 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val progressBar = binding.progressBar
         viewModel.getBookWithId(args.bookId)
 
         viewModel.book.observe(viewLifecycleOwner) { book ->
@@ -61,6 +63,17 @@ class DetailFragment : Fragment() {
                 }
             }
         }
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+            if (isLoading) {
+                progressBar.visibility = View.VISIBLE
+            } else {
+                val handler = Handler(Looper.getMainLooper())
+                handler.postDelayed({
+                    progressBar.visibility = View.GONE
+                }, 1061)
+            }
+        }
     }
-
 }
+
+
