@@ -3,6 +3,14 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="readopia_app_name">READOPIA</string>
     <string name="button">button</string>
-    <string name="book_name"> </string>
+    <string name="book_name">Book Name</string>
     <string name="read_button">Read</string>
+    <string name="download_count"> </string>
+    <string name="download_count_label">Download Count</string>
+    <string name="languages_label">Languages</string>
+    <string name="languages"> </string>
+    <string name="copyright_label">Copyright</string>
+    <string name="content">Content</string>
+    <string name="bookshelves">bookshelves</string>
+    <string name="author_name">author</string>
 </resources>

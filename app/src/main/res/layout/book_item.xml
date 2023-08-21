@@ -1,67 +1,77 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_12"
-    android:orientation="horizontal"
-    android:padding="16dp"
-    app:cardBackgroundColor="@color/background"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="4dp">
+    android:padding="16dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp">
 
-        <TextView
-            android:id="@+id/nameTextView"
-            android:layout_width="0dp"
+    <androidx.cardview.widget.CardView
+        android:layout_width="120dp"
+        android:layout_height="180dp"
+        app:cardBackgroundColor="@color/background"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        android:id="@+id/card_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_12"
-            android:fontFamily="sans-serif-light"
-            android:gravity="start"
-            android:text="@string/book_name"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_16"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/imageViewBook"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewBook" />
+            android:layout_gravity="bottom"
+            android:layout_margin="8dp">
 
-        <TextView
-            android:id="@+id/authorTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_8"
-            android:layout_marginBottom="@dimen/margin_12"
-            android:fontFamily="sans-serif-light"
-            android:gravity="start"
-            android:text="@string/book_name"
-            android:textColor="@color/text_author"
-            android:textSize="@dimen/text_size_12"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/nameTextView"
-            app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
+            <TextView
+                android:id="@+id/nameTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_12"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-light"
+                android:gravity="start"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/authorTextView"
+                app:layout_constraintHorizontal_bias="1.0"
+                tools:text="@string/book_name" />
 
-        <androidx.constraintlayout.utils.widget.ImageFilterView
-            android:id="@+id/imageViewBook"
-            android:layout_width="120dp"
-            android:layout_height="180dp"
-            android:layout_marginStart="@dimen/margin_32"
-            android:layout_marginTop="@dimen/margin_12"
-            android:layout_marginEnd="@dimen/margin_32"
-            android:layout_marginBottom="@dimen/margin_48"
-            android:scaleType="centerCrop"
-            android:src="@drawable/book_wallpaper"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:roundPercent="0.3" />
+            <TextView
+                android:id="@+id/authorTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8"
+                android:layout_marginBottom="@dimen/margin_12"
+                android:fontFamily="sans-serif-light"
+                android:gravity="start"
+                android:text="@string/author_name"
+                android:textColor="@color/text_author"
+                android:textSize="@dimen/text_size_12"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/imageViewBook"
+        android:layout_width="120dp"
+        android:layout_height="180dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_readopia"
+        app:layout_constraintBottom_toTopOf="@id/card_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/card_view"
+        app:roundPercent="0.3" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

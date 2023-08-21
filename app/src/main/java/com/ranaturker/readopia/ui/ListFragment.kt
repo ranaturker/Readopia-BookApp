@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ranaturker.readopia.databinding.FragmentListBinding
 
@@ -26,7 +28,7 @@ class ListFragment : Fragment(), BookAdapter.RecyclerViewEvent {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
         bookAdapter = BookAdapter(emptyList(), this@ListFragment)
         recyclerView.adapter = bookAdapter
 
@@ -35,12 +37,11 @@ class ListFragment : Fragment(), BookAdapter.RecyclerViewEvent {
             if (books != null) {
                 when (books) {
                     UIState.Loading -> {
-                        repeat(61) { index ->
-                            binding.progressIndicator.progress = index
-                        }
+                        binding.progressIndicator.isVisible = true
                     }
                     is UIState.Success -> {
                         bookAdapter.updateData(books.data)
+                        binding.progressIndicator.isVisible = false
                     }
                 }
             }

@@ -14,6 +14,7 @@ import androidx.navigation.fragment.navArgs
 import coil.load
 import com.ranaturker.readopia.R
 import com.ranaturker.readopia.databinding.FragmentDetailBinding
+import com.ranaturker.readopia.network.Result
 
 class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
@@ -35,33 +36,40 @@ class DetailFragment : Fragment() {
 
         viewModel.book.observe(viewLifecycleOwner) { book ->
             if (book != null) {
-                binding.bookName.text = book.title
+                showCopyrightStatus(book)
                 val authorName = book.authors?.get(0)?.name ?: "Unknown Author"
-                binding.authorTextView.text = authorName
-                binding.imageViewBook.load(book.formats?.imageJpeg){
-                    placeholder(R.drawable.book_wallpaper)
-                    error(R.drawable.ic_error_image)
-                }
-
-                binding.button.setOnClickListener {
-                    if (book.formats?.textHtmlUtf8 != null) {
-                        val action =
-                            DetailFragmentDirections.actionDetailFragmentToReadingFragment(
-                                book.formats.textHtmlUtf8
-                            )
-                        findNavController().navigate(action)
-                    } else if (book.formats?.textHtml != null) {
-                        val action =
-                            DetailFragmentDirections.actionDetailFragmentToReadingFragment(
-                                book.formats.textHtml
-                            )
-                        findNavController().navigate(action)
-                    } else {
-                        Toast.makeText(
-                            requireContext(),
-                            "There is no reading page.",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                val languages = book.languages?.joinToString(", ")
+                val subjects = book.subjects
+                with(binding) {
+                    bookName.text = book.title
+                    authorTextView.text = authorName
+                    languageTextView.text = languages
+                    content.text = subjects?.joinToString(",")
+                    downloadCount.text = book.downloadCount.toString()
+                    imageViewBook.load(book.formats?.imageJpeg) {
+                        placeholder(R.drawable.book_wallpaper)
+                        error(R.drawable.ic_error_image)
+                    }
+                    button.setOnClickListener {
+                        if (book.formats?.textHtmlUtf8 != null) {
+                            val action =
+                                DetailFragmentDirections.actionDetailFragmentToReadingFragment(
+                                    book.formats.textHtmlUtf8
+                                )
+                            findNavController().navigate(action)
+                        } else if (book.formats?.textHtml != null) {
+                            val action =
+                                DetailFragmentDirections.actionDetailFragmentToReadingFragment(
+                                    book.formats.textHtml
+                                )
+                            findNavController().navigate(action)
+                        } else {
+                            Toast.makeText(
+                                requireContext(),
+                                "There is no reading page.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
             }
@@ -70,13 +78,21 @@ class DetailFragment : Fragment() {
             if (isLoading) {
                 progressBar.visibility = View.VISIBLE
             } else {
-                val handler = Handler(Looper.getMainLooper())
-                handler.postDelayed({
-                    progressBar.visibility = View.GONE
-                }, 1061)
+                progressBar.visibility = View.GONE
             }
         }
     }
+
+    private fun showCopyrightStatus(result: Result) = with(binding) {
+        val isTrue = result.copyright ?: false
+        val statusIcon = if (isTrue) {
+            R.drawable.ic_copyright
+        } else {
+            R.drawable.ic_forbidden
+        }
+        imageViewStatus.load(statusIcon)
+    }
 }
+
 
 
