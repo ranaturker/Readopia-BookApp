@@ -39,6 +39,7 @@ class BookAdapter(
 
     inner class BookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
+        private val authorTextView: TextView = itemView.findViewById(R.id.authorTextView)
         private val imageViewBook: ImageFilterView = itemView.findViewById(R.id.imageViewBook)
 
         init {
@@ -56,6 +57,8 @@ class BookAdapter(
         fun bind(book: Result?) {
             if (book != null) {
                 nameTextView.text = book.title
+                val authorName = book.authors?.get(0)?.name ?: "Unknown Author"
+                authorTextView.text = authorName
                 imageViewBook.load(book.formats?.imageJpeg){
                     placeholder(R.drawable.book_wallpaper)
                     error(R.drawable.ic_error_image)

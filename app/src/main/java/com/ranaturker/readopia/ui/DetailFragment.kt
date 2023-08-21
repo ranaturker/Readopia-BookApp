@@ -11,6 +11,8 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import coil.load
+import com.ranaturker.readopia.R
 import com.ranaturker.readopia.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment() {
@@ -33,12 +35,13 @@ class DetailFragment : Fragment() {
 
         viewModel.book.observe(viewLifecycleOwner) { book ->
             if (book != null) {
-                binding.name.text = book.title
-            }
-        }
-        viewModel.book.observe(viewLifecycleOwner) { book ->
-            if (book != null) {
-                binding.name.text = book.title
+                binding.bookName.text = book.title
+                val authorName = book.authors?.get(0)?.name ?: "Unknown Author"
+                binding.authorTextView.text = authorName
+                binding.imageViewBook.load(book.formats?.imageJpeg){
+                    placeholder(R.drawable.book_wallpaper)
+                    error(R.drawable.ic_error_image)
+                }
 
                 binding.button.setOnClickListener {
                     if (book.formats?.textHtmlUtf8 != null) {

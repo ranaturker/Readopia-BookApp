@@ -7,7 +7,7 @@
     tools:context=".ui.ListFragment">
 
     <ImageView
-        android:id="@+id/ic_spacex"
+        android:id="@+id/ic_readopia"
         android:layout_width="160dp"
         android:layout_height="100dp"
         android:layout_marginTop="@dimen/margin_16"
@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ic_spacex"
+        app:layout_constraintTop_toBottomOf="@id/ic_readopia"
         tools:itemCount="4"
         tools:layout_editor_absoluteX="0dp"
         tools:listitem="@layout/book_item">

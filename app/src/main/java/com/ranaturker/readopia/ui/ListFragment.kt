@@ -1,7 +1,6 @@
 package com.ranaturker.readopia.ui
 
 import android.os.Bundle
-import android.provider.Contacts.Intents.UI
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -47,7 +46,6 @@ class ListFragment : Fragment(), BookAdapter.RecyclerViewEvent {
             }
         }
     }
-
     override fun onItemClick(bookId: Int) {
         findNavController().navigate(
             ListFragmentDirections.actionListFragmentToDetailFragment(
