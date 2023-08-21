@@ -11,6 +11,6 @@
     <string name="languages"> </string>
     <string name="copyright_label">Copyright</string>
     <string name="content">Content</string>
-    <string name="bookshelves">bookshelves</string>
+    <string name="bookshelves">Bookshelves</string>
     <string name="author_name">author</string>
 </resources>

@@ -1,8 +1,6 @@
 package com.ranaturker.readopia.ui
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -40,10 +38,12 @@ class DetailFragment : Fragment() {
                 val authorName = book.authors?.get(0)?.name ?: "Unknown Author"
                 val languages = book.languages?.joinToString(", ")
                 val subjects = book.subjects
+                val bookshelf = book.bookshelves?.toString()?: "This book has no bookshelf"
                 with(binding) {
                     bookName.text = book.title
                     authorTextView.text = authorName
                     languageTextView.text = languages
+                    bookshelves.text = bookshelf
                     content.text = subjects?.joinToString(",")
                     downloadCount.text = book.downloadCount.toString()
                     imageViewBook.load(book.formats?.imageJpeg) {

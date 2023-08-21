@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.utils.widget.ImageFilterView
+import androidx.core.graphics.drawable.toBitmap
+import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.ranaturker.readopia.R
@@ -41,6 +44,7 @@ class BookAdapter(
         private val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
         private val authorTextView: TextView = itemView.findViewById(R.id.authorTextView)
         private val imageViewBook: ImageFilterView = itemView.findViewById(R.id.imageViewBook)
+        private val cardView: CardView = itemView.findViewById(R.id.card_view)
 
         init {
             itemView.setOnClickListener {
@@ -59,9 +63,22 @@ class BookAdapter(
                 nameTextView.text = book.title
                 val authorName = book.authors?.get(0)?.name ?: "Unknown Author"
                 authorTextView.text = authorName
-                imageViewBook.load(book.formats?.imageJpeg){
+                imageViewBook.load(book.formats?.imageJpeg) {
                     placeholder(R.drawable.book_wallpaper)
                     error(R.drawable.ic_error_image)
+                    // Disable hardware bitmaps as Palette needs to read the image’s pixels.
+                    allowHardware(false)
+                    listener(
+                        onSuccess = { _, result ->
+                            // Create the palette on a background thread.
+                            Palette.Builder(result.drawable.toBitmap()).generate { palette ->
+                                palette?.let {
+                                    val defaultColor = cardView.context.getColor(R.color.background)
+                                    cardView.setCardBackgroundColor(it.getLightVibrantColor(defaultColor))
+                                }
+                            }
+                        }
+                    )
                 }
             }
         }
