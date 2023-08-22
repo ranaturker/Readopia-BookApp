@@ -9,20 +9,20 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="36dp"
+        android:layout_height="@dimen/height_36"
+        android:layout_marginBottom="@dimen/margin_8"
         android:background="@color/white"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@id/web_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="@dimen/margin_8"
-        app:layout_constraintBottom_toTopOf="@id/web_view"
-        android:theme="?attr/actionBarTheme"
         app:navigationIcon="?android:attr/homeAsUpIndicator" />
 
     <WebView
         android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/margin_32"/>
+        android:layout_marginTop="@dimen/margin_32" />
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progress"
@@ -30,24 +30,12 @@
         android:layout_height="wrap_content"
         android:progress="40"
         app:indicatorColor="@color/progress_bar"
-        app:trackColor="@color/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:trackColor="@color/background"
         app:trackThickness="4dp" />
-
-    <TextView
-        android:id="@+id/text_view_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_12"
-        app:layout_constraintBottom_toBottomOf="@+id/web_view"
-        app:layout_constraintEnd_toEndOf="@+id/web_view"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/web_view"
-        tools:text="text" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -59,7 +47,7 @@
         app:layout_constraintVertical_chainStyle="packed">
 
         <TextView
-            android:id="@+id/url_text_view"
+            android:id="@+id/text_view_reading_url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"

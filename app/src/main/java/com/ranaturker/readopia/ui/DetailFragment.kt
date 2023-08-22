@@ -45,23 +45,23 @@ class DetailFragment : Fragment() {
                 val authorName = book.authors?.get(0)?.name ?: "Unknown Author"
                 val languages = book.languages?.joinToString(", ")
                 val subjects = book.subjects
-                val bookshelf = book.bookshelves?.toString()?: "This book has no bookshelf"
+                val bookshelf = book.bookshelves?.toString() ?: "This book has no bookshelf"
                 with(binding) {
-                    bookName.text = book.title
-                    authorTextView.text = authorName
-                    languageTextView.text = languages
-                    bookshelves.text = bookshelf
-                    content.text = subjects?.joinToString(",")
-                    downloadCount.text = book.downloadCount.toString()
+                    textViewBookName.text = book.title
+                    textViewAuthor.text = authorName
+                    textViewLanguages.text = languages
+                    textViewBookshelves.text = bookshelf
+                    textViewContent.text = subjects?.joinToString(",")
+                    textViewDownloadCount.text = book.downloadCount.toString()
                     imageViewBook.load(book.formats?.imageJpeg) {
-                        placeholder(R.drawable.book_wallpaper)
+                        placeholder(R.drawable.img_book_wallpaper)
                         error(R.drawable.ic_error_image)
                     }
-                    imageViewBookBg.load(book.formats?.imageJpeg) {
-                        placeholder(R.drawable.book_wallpaper)
+                    imageViewBookBackground.load(book.formats?.imageJpeg) {
+                        placeholder(R.drawable.img_book_wallpaper)
                         error(R.drawable.ic_error_image)
                     }
-                    button.setOnClickListener {
+                    buttonRead.setOnClickListener {
                         if (book.formats?.textHtmlUtf8 != null) {
                             val action =
                                 DetailFragmentDirections.actionDetailFragmentToReadingFragment(
@@ -101,6 +101,6 @@ class DetailFragment : Fragment() {
         } else {
             R.drawable.ic_forbidden
         }
-        imageViewStatus.load(statusIcon)
+        imageViewCopyrightStatus.load(statusIcon)
     }
 }

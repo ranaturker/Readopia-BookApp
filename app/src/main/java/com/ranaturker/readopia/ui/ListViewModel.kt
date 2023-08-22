@@ -11,7 +11,6 @@ import com.ranaturker.readopia.network.Result
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
-
 class ListViewModel : ViewModel() {
 
     private val _uiState = MutableLiveData<UIState>()

@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:padding="@dimen/padding_8">
 
     <FrameLayout
         android:id="@+id/linear_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:paddingHorizontal="8dp"
+        android:paddingHorizontal="@dimen/padding_8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,17 +23,17 @@
             android:layout_gravity="bottom"
             android:alpha="0.25"
             android:background="@drawable/rounded_background"
-            android:paddingHorizontal="8dp" />
+            android:paddingHorizontal="@dimen/padding_8" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="bottom"
-            android:layout_margin="8dp"
-            android:paddingHorizontal="8dp">
+            android:layout_margin="@dimen/margin_8"
+            android:paddingHorizontal="@dimen/padding_8">
 
             <TextView
-                android:id="@+id/nameTextView"
+                android:id="@+id/text_view_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_12"
@@ -44,14 +44,14 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_16"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/authorTextView"
+                app:layout_constraintBottom_toTopOf="@id/text_view_author"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="@string/book_name" />
 
             <TextView
-                android:id="@+id/authorTextView"
+                android:id="@+id/text_view_author"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_8"
@@ -103,15 +103,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_background_white"
-        android:padding="2dp"
+        android:padding="@dimen/padding_2"
         app:layout_constraintBottom_toBottomOf="@+id/guideline_bottom"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
-            android:id="@+id/imageViewBook"
-            android:layout_width="120dp"
+            android:id="@+id/image_view_book"
+            android:layout_width="@dimen/width_120"
             android:layout_height="0dp"
             android:elevation="6dp"
             android:scaleType="centerCrop"
@@ -121,7 +121,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:roundPercent="0.2"
-            tools:src="@drawable/book_wallpaper" />
+            tools:src="@drawable/img_book_wallpaper" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

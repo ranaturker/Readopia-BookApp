@@ -9,17 +9,17 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:layout_height="@dimen/height_32"
+        android:layout_marginBottom="@dimen/margin_8"
         android:background="@color/white"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@id/image_view_book"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginBottom="@dimen/margin_8"
-        app:layout_constraintBottom_toTopOf="@id/imageViewBook"
-        android:theme="?attr/actionBarTheme"
         app:navigationIcon="?android:attr/homeAsUpIndicator" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminate="true"
@@ -30,20 +30,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_read"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_36"
         android:layout_marginEnd="@dimen/margin_32"
-        android:gravity="center"
+        android:layout_marginBottom="@dimen/margin_36"
         android:backgroundTint="@color/background"
+        android:gravity="center"
         android:text="@string/read_button"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/bookName"
+        android:id="@+id/text_view_book_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_16"
@@ -54,10 +54,10 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageViewBook" />
+        app:layout_constraintTop_toBottomOf="@id/image_view_book" />
 
     <TextView
-        android:id="@+id/authorTextView"
+        android:id="@+id/text_view_author"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_8"
@@ -68,17 +68,17 @@
         android:textSize="@dimen/text_size_12"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bookName" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view_book_name" />
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
-        android:id="@+id/imageViewBookBg"
+        android:id="@+id/image_view_book_background"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:alpha="0.5"
         android:scaleType="centerCrop"
-        android:src="@drawable/book_wallpaper"
+        android:src="@drawable/img_book_wallpaper"
         app:imageZoom="1.2"
-        app:layout_constraintBottom_toTopOf="@id/bookName"
+        app:layout_constraintBottom_toTopOf="@id/text_view_book_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -86,32 +86,31 @@
     <View
         android:id="@+id/shadow"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/height_60"
         android:background="@drawable/gradient_background"
-        app:layout_constraintBottom_toTopOf="@+id/bookName"
+        app:layout_constraintBottom_toTopOf="@+id/text_view_book_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
-        android:id="@+id/imageViewBook"
-        android:layout_width="120dp"
-        android:layout_height="180dp"
+        android:id="@+id/image_view_book"
+        android:layout_width="@dimen/width_120"
+        android:layout_height="@dimen/height_180"
         android:layout_marginStart="@dimen/margin_32"
         android:layout_marginTop="@dimen/margin_32"
         android:layout_marginEnd="@dimen/margin_32"
         android:layout_marginBottom="@dimen/margin_48"
         android:elevation="12dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/book_wallpaper"
-        app:layout_constraintBottom_toTopOf="@id/bookName"
+        android:src="@drawable/img_book_wallpaper"
+        app:layout_constraintBottom_toTopOf="@id/text_view_book_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:roundPercent="0.3" />
 
-
     <TextView
-        android:id="@+id/bookshelvesLabelTextView"
+        android:id="@+id/text_view_bookshelves_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_12"
@@ -125,28 +124,26 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_third"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/width_350"
+        android:layout_height="@dimen/height_50"
         android:layout_margin="@dimen/margin_8"
         android:layout_marginTop="@dimen/margin_32"
         android:orientation="horizontal"
-        android:padding="8dp"
+        android:padding="@dimen/padding_8"
         app:cardBackgroundColor="@color/background"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bookshelvesLabelTextView">
-
+        app:layout_constraintTop_toBottomOf="@id/text_view_bookshelves_label">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".ui.DetailFragment">
 
-
             <TextView
-                android:id="@+id/bookshelves"
+                android:id="@+id/text_view_bookshelves"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/margin_12"
@@ -160,13 +157,11 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_goneMarginTop="@dimen/margin_12" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-
     <TextView
-        android:id="@+id/contentLabelTextView"
+        android:id="@+id/text_view_content_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_12"
@@ -180,18 +175,18 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_second"
-        android:layout_width="350dp"
-        android:layout_height="120dp"
+        android:layout_width="@dimen/width_350"
+        android:layout_height="@dimen/height_120"
         android:layout_margin="@dimen/margin_8"
         android:layout_marginTop="@dimen/margin_32"
         android:orientation="horizontal"
-        android:padding="8dp"
+        android:padding="@dimen/padding_8"
         app:cardBackgroundColor="@color/background"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/contentLabelTextView">
+        app:layout_constraintTop_toBottomOf="@id/text_view_content_label">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -199,7 +194,7 @@
             tools:context=".ui.DetailFragment">
 
             <TextView
-                android:id="@+id/content"
+                android:id="@+id/text_view_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/margin_12"
@@ -218,18 +213,18 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_first"
-        android:layout_width="350dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/width_350"
+        android:layout_height="@dimen/height_60"
         android:layout_margin="@dimen/margin_8"
         android:layout_marginTop="@dimen/margin_32"
         android:orientation="horizontal"
-        android:padding="8dp"
+        android:padding="@dimen/padding_8"
         app:cardBackgroundColor="@color/background"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/authorTextView">
+        app:layout_constraintTop_toBottomOf="@id/text_view_author">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -237,7 +232,7 @@
             tools:context=".ui.DetailFragment">
 
             <TextView
-                android:id="@+id/downloadCountLabelTextView"
+                android:id="@+id/text_view_download_count_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_24"
@@ -251,7 +246,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/downloadCount"
+                android:id="@+id/text_view_download_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_8"
@@ -260,12 +255,12 @@
                 android:text="@string/download_count"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_12"
-                app:layout_constraintEnd_toEndOf="@id/downloadCountLabelTextView"
-                app:layout_constraintStart_toStartOf="@id/downloadCountLabelTextView"
-                app:layout_constraintTop_toBottomOf="@+id/downloadCountLabelTextView" />
+                app:layout_constraintEnd_toEndOf="@id/text_view_download_count_label"
+                app:layout_constraintStart_toStartOf="@id/text_view_download_count_label"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_download_count_label" />
 
             <TextView
-                android:id="@+id/languagesLabelTextView"
+                android:id="@+id/text_view_languages_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_36"
@@ -275,11 +270,11 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_12"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/downloadCountLabelTextView"
+                app:layout_constraintStart_toEndOf="@id/text_view_download_count_label"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/language_text_view"
+                android:id="@+id/text_view_languages"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_8"
@@ -288,12 +283,12 @@
                 android:text="@string/languages"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_12"
-                app:layout_constraintEnd_toEndOf="@id/languagesLabelTextView"
-                app:layout_constraintStart_toStartOf="@id/languagesLabelTextView"
-                app:layout_constraintTop_toBottomOf="@+id/languagesLabelTextView" />
+                app:layout_constraintEnd_toEndOf="@id/text_view_languages_label"
+                app:layout_constraintStart_toStartOf="@id/text_view_languages_label"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_languages_label" />
 
             <TextView
-                android:id="@+id/copyrightLabelTextView"
+                android:id="@+id/text_view_copyright_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_36"
@@ -303,19 +298,19 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_12"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/languagesLabelTextView"
+                app:layout_constraintStart_toEndOf="@id/text_view_languages_label"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageViewStatus"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:id="@+id/image_view_copyright_status"
+                android:layout_width="@dimen/width_20"
+                android:layout_height="@dimen/height_20"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/ic_copyright"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/copyrightLabelTextView"
-                app:layout_constraintStart_toStartOf="@id/copyrightLabelTextView"
-                app:layout_constraintTop_toBottomOf="@+id/copyrightLabelTextView" />
+                app:layout_constraintEnd_toEndOf="@id/text_view_copyright_label"
+                app:layout_constraintStart_toStartOf="@id/text_view_copyright_label"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_copyright_label" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

@@ -12,13 +12,13 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
 
-class DetailViewModel: ViewModel() {
+class DetailViewModel : ViewModel() {
     val bookLiveData = MutableLiveData<Result?>()
     val book: LiveData<Result?> = bookLiveData
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    fun getBookWithId(id : Int) {
+    fun getBookWithId(id: Int) {
         viewModelScope.launch {
             _isLoading.postValue(true)
             BooksApiService.api.getBookWithId(id).enqueue(object : retrofit2.Callback<Books> {

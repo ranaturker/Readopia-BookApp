@@ -3,10 +3,7 @@ package com.ranaturker.readopia.ui
 import android.annotation.SuppressLint
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.core.graphics.drawable.toBitmap
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.RecyclerView
@@ -61,11 +58,11 @@ class BookAdapter(
 
                 val defaultCardBgColor = root.context.getColor(R.color.background)
 
-                nameTextView.text = book.title
+                textViewName.text = book.title
                 val authorName = book.authors?.get(0)?.name ?: "Unknown Author"
-                authorTextView.text = authorName
+                textViewAuthor.text = authorName
                 imageViewBook.load(book.formats?.imageJpeg) {
-                    placeholder(R.drawable.book_wallpaper)
+                    placeholder(R.drawable.img_book_wallpaper)
                     error(R.drawable.ic_error_image)
                     allowHardware(false)
                     listener(
@@ -90,7 +87,6 @@ class BookAdapter(
             }
         }
     }
-
     interface RecyclerViewEvent {
         fun onItemClick(bookId: Int)
     }

@@ -41,7 +41,7 @@
         android:id="@+id/splashScreenFragment"
         android:name="com.ranaturker.readopia.ui.SplashScreenFragment"
         android:label="fragment_splash_screen"
-        tools:layout="@layout/fragment_splash_screen" >
+        tools:layout="@layout/fragment_splash_screen">
         <action
             android:id="@+id/action_splashScreenFragment_to_listFragment"
             app:destination="@id/listFragment" />
