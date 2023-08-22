@@ -1,13 +1,12 @@
 package com.ranaturker.readopia.ui
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -32,7 +31,13 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val progressBar = binding.progressBar
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         viewModel.getBookWithId(args.bookId)
+
+        val navController = findNavController()
+        toolbar.setNavigationOnClickListener {
+            navController.navigateUp()
+        }
 
         viewModel.book.observe(viewLifecycleOwner) { book ->
             if (book != null) {
