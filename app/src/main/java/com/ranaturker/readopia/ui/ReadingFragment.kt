@@ -9,7 +9,10 @@ import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import androidx.appcompat.widget.Toolbar
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.ranaturker.readopia.R
 import com.ranaturker.readopia.databinding.FragmentReadingBinding
 import com.ranaturker.readopia.network.BooksApiService
 import okhttp3.ResponseBody
@@ -32,7 +35,11 @@ class ReadingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
+        val navController = findNavController()
+        toolbar.setNavigationOnClickListener {
+            navController.navigateUp()
+        }
         val url = args.url
         loadWebView(url)
     }
