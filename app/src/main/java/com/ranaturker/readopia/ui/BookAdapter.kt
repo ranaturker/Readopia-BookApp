@@ -1,17 +1,18 @@
 package com.ranaturker.readopia.ui
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.core.graphics.drawable.toBitmap
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.ranaturker.readopia.R
+import com.ranaturker.readopia.databinding.BookItemBinding
 import com.ranaturker.readopia.network.Result
 
 class BookAdapter(
@@ -21,8 +22,9 @@ class BookAdapter(
     RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.book_item, parent, false)
-        return BookViewHolder(view)
+        val binding = BookItemBinding.inflate(LayoutInflater.from(parent.context))
+
+        return BookViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
@@ -40,14 +42,10 @@ class BookAdapter(
         notifyDataSetChanged()
     }
 
-    inner class BookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
-        private val authorTextView: TextView = itemView.findViewById(R.id.authorTextView)
-        private val imageViewBook: ImageFilterView = itemView.findViewById(R.id.imageViewBook)
-        private val cardView: CardView = itemView.findViewById(R.id.card_view)
-
+    inner class BookViewHolder(val binding: BookItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         init {
-            itemView.setOnClickListener {
+            binding.root.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     val id = bookList?.get(position)?.id
@@ -58,23 +56,32 @@ class BookAdapter(
             }
         }
 
-        fun bind(book: Result?) {
+        fun bind(book: Result?) = with(binding) {
             if (book != null) {
+
+                val defaultCardBgColor = root.context.getColor(R.color.background)
+
                 nameTextView.text = book.title
                 val authorName = book.authors?.get(0)?.name ?: "Unknown Author"
                 authorTextView.text = authorName
                 imageViewBook.load(book.formats?.imageJpeg) {
                     placeholder(R.drawable.book_wallpaper)
                     error(R.drawable.ic_error_image)
-                    // Disable hardware bitmaps as Palette needs to read the image’s pixels.
                     allowHardware(false)
                     listener(
                         onSuccess = { _, result ->
                             // Create the palette on a background thread.
                             Palette.Builder(result.drawable.toBitmap()).generate { palette ->
-                                palette?.let {
-                                    val defaultColor = cardView.context.getColor(R.color.background)
-                                    cardView.setCardBackgroundColor(it.getLightVibrantColor(defaultColor))
+                                if (palette != null) {
+                                    val color = palette.getDominantColor(defaultCardBgColor)
+
+                                    val gradientDrawable = GradientDrawable().apply {
+                                        setColor(color)
+                                        cornerRadius =
+                                            root.context.resources.getDimension(R.dimen.margin_12)
+                                    }
+
+                                    constraintLayoutContainer.background = gradientDrawable
                                 }
                             }
                         }

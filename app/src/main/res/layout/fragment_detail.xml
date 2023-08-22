@@ -21,9 +21,9 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_32"
+        android:layout_marginBottom="@dimen/margin_24"
         android:backgroundTint="@color/background"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="@dimen/margin_12"
         android:text="@string/read_button"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -58,6 +58,28 @@
         app:layout_constraintTop_toBottomOf="@+id/bookName" />
 
     <androidx.constraintlayout.utils.widget.ImageFilterView
+        android:id="@+id/imageViewBookBg"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:alpha="0.5"
+        android:scaleType="centerCrop"
+        android:src="@drawable/book_wallpaper"
+        app:imageZoom="1.2"
+        app:layout_constraintBottom_toTopOf="@id/bookName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/shadow"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/gradient_background"
+        app:layout_constraintBottom_toTopOf="@+id/bookName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.utils.widget.ImageFilterView
         android:id="@+id/imageViewBook"
         android:layout_width="120dp"
         android:layout_height="180dp"
@@ -65,6 +87,7 @@
         android:layout_marginTop="@dimen/margin_32"
         android:layout_marginEnd="@dimen/margin_32"
         android:layout_marginBottom="@dimen/margin_48"
+        android:elevation="12dp"
         android:scaleType="centerCrop"
         android:src="@drawable/book_wallpaper"
         app:layout_constraintBottom_toTopOf="@id/bookName"
@@ -72,6 +95,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:roundPercent="0.3" />
+
 
     <TextView
         android:id="@+id/bookshelvesLabelTextView"
@@ -85,14 +109,15 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/card_view_second"
         app:layout_constraintTop_toBottomOf="@id/card_view_second" />
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_third"
         android:layout_width="350dp"
         android:layout_height="50dp"
         android:layout_margin="@dimen/margin_8"
         android:layout_marginTop="@dimen/margin_32"
         android:orientation="horizontal"
         android:padding="8dp"
-        android:id="@+id/card_view_third"
         app:cardBackgroundColor="@color/background"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
@@ -100,29 +125,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bookshelvesLabelTextView">
 
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".ui.DetailFragment">
 
+
             <TextView
                 android:id="@+id/bookshelves"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/margin_12"
                 android:layout_marginTop="@dimen/margin_8"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center_horizontal"
                 android:text="@string/bookshelves"
-                android:layout_marginStart="@dimen/margin_12"
-                app:layout_goneMarginTop="@dimen/margin_12"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_16"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_goneMarginTop="@dimen/margin_12" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-
 
 
     <TextView
@@ -139,13 +166,13 @@
         app:layout_constraintTop_toBottomOf="@id/card_view_first" />
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_second"
         android:layout_width="350dp"
         android:layout_height="120dp"
         android:layout_margin="@dimen/margin_8"
         android:layout_marginTop="@dimen/margin_32"
         android:orientation="horizontal"
         android:padding="8dp"
-        android:id="@+id/card_view_second"
         app:cardBackgroundColor="@color/background"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
@@ -162,28 +189,28 @@
                 android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/margin_12"
                 android:layout_marginTop="@dimen/margin_8"
                 android:fontFamily="sans-serif-light"
                 android:gravity="center_horizontal"
                 android:text="@string/content"
-                android:layout_marginStart="@dimen/margin_12"
-                app:layout_goneMarginTop="@dimen/margin_12"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_16"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_goneMarginTop="@dimen/margin_12" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_first"
         android:layout_width="350dp"
         android:layout_height="60dp"
         android:layout_margin="@dimen/margin_8"
         android:layout_marginTop="@dimen/margin_32"
         android:orientation="horizontal"
         android:padding="8dp"
-        android:id="@+id/card_view_first"
         app:cardBackgroundColor="@color/background"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"

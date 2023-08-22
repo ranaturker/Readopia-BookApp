@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".ui.ListFragment">
 
     <ImageView
@@ -32,10 +33,11 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ic_readopia"
+        app:spanCount="2"
         tools:itemCount="4"
-        tools:layout_editor_absoluteX="0dp"
         tools:listitem="@layout/book_item">
 
     </androidx.recyclerview.widget.RecyclerView>

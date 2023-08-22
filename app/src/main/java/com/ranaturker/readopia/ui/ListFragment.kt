@@ -28,17 +28,17 @@ class ListFragment : Fragment(), BookAdapter.RecyclerViewEvent {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         bookAdapter = BookAdapter(emptyList(), this@ListFragment)
         recyclerView.adapter = bookAdapter
 
-        viewModel.getBooks()
         viewModel.uiState.observe(viewLifecycleOwner) { books ->
             if (books != null) {
                 when (books) {
                     UIState.Loading -> {
                         binding.progressIndicator.isVisible = true
                     }
+
                     is UIState.Success -> {
                         bookAdapter.updateData(books.data)
                         binding.progressIndicator.isVisible = false
@@ -47,6 +47,7 @@ class ListFragment : Fragment(), BookAdapter.RecyclerViewEvent {
             }
         }
     }
+
     override fun onItemClick(bookId: Int) {
         findNavController().navigate(
             ListFragmentDirections.actionListFragmentToDetailFragment(
@@ -55,4 +56,3 @@ class ListFragment : Fragment(), BookAdapter.RecyclerViewEvent {
         )
     }
 }
-

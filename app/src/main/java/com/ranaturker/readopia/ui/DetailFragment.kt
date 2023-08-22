@@ -1,6 +1,8 @@
 package com.ranaturker.readopia.ui
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -50,6 +52,10 @@ class DetailFragment : Fragment() {
                         placeholder(R.drawable.book_wallpaper)
                         error(R.drawable.ic_error_image)
                     }
+                    imageViewBookBg.load(book.formats?.imageJpeg) {
+                        placeholder(R.drawable.book_wallpaper)
+                        error(R.drawable.ic_error_image)
+                    }
                     button.setOnClickListener {
                         if (book.formats?.textHtmlUtf8 != null) {
                             val action =
@@ -93,6 +99,3 @@ class DetailFragment : Fragment() {
         imageViewStatus.load(statusIcon)
     }
 }
-
-
-

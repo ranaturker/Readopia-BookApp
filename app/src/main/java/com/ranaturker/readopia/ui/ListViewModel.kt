@@ -17,7 +17,11 @@ class ListViewModel : ViewModel() {
     private val _uiState = MutableLiveData<UIState>()
     val uiState: LiveData<UIState> = _uiState
 
-    fun getBooks() {
+    init {
+        getBooks()
+    }
+
+    private fun getBooks() {
         viewModelScope.launch {
             _uiState.postValue(UIState.Loading)
             BooksApiService.api.getBooks().enqueue(object : retrofit2.Callback<Books> {
