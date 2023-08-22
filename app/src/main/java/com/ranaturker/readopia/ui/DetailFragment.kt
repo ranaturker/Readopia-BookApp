@@ -14,6 +14,8 @@ import coil.load
 import com.ranaturker.readopia.R
 import com.ranaturker.readopia.databinding.FragmentDetailBinding
 import com.ranaturker.readopia.network.Result
+import com.ranaturker.readopia.util.BookState
+import com.ranaturker.readopia.util.PrefUtil
 
 class DetailFragment : Fragment() {
     private lateinit var binding: FragmentDetailBinding
@@ -25,6 +27,7 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDetailBinding.inflate(layoutInflater)
+        PrefUtil.initPref(requireContext())
         return binding.root
     }
 
@@ -43,15 +46,22 @@ class DetailFragment : Fragment() {
             if (book != null) {
                 showCopyrightStatus(book)
                 val authorName = book.authors?.get(0)?.name ?: "Unknown Author"
-                val languages = book.languages?.joinToString(", ")
-                val subjects = book.subjects
-                val bookshelf = book.bookshelves?.toString() ?: "This book has no bookshelf"
+                val languages = book.languages?.joinToString()
+                val subjects = book.subjects?.take(4)
+                val bookshelf =
+                    book.bookshelves?.let { shelves ->
+                        if (shelves.isNotEmpty()) {
+                            shelves.joinToString(",")
+                        } else {
+                            "This book has no bookshelf"
+                        }
+                    } ?: "This book has no bookshelf"
                 with(binding) {
                     textViewBookName.text = book.title
                     textViewAuthor.text = authorName
                     textViewLanguages.text = languages
-                    textViewBookshelves.text = bookshelf
-                    textViewContent.text = subjects?.joinToString(",")
+                    textViewBookshelves.text = bookshelf.removePrefix("[").removeSuffix("]")
+                    textViewContent.text = subjects?.joinToString("\n")
                     textViewDownloadCount.text = book.downloadCount.toString()
                     imageViewBook.load(book.formats?.imageJpeg) {
                         placeholder(R.drawable.img_book_wallpaper)
@@ -61,7 +71,14 @@ class DetailFragment : Fragment() {
                         placeholder(R.drawable.img_book_wallpaper)
                         error(R.drawable.ic_error_image)
                     }
+                    book.id?.let {
+                        if (PrefUtil.isReading(id = it)){
+                            buttonRead.text = "continue reading"
+                        }
+                    }
+
                     buttonRead.setOnClickListener {
+                        book.id?.let { bookId -> PrefUtil.setBookPref(id= bookId) }
                         if (book.formats?.textHtmlUtf8 != null) {
                             val action =
                                 DetailFragmentDirections.actionDetailFragmentToReadingFragment(

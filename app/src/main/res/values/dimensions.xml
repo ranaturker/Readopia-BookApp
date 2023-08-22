@@ -4,6 +4,7 @@
     <dimen name="text_size_8">8sp</dimen>
     <dimen name="text_size_12">12sp</dimen>
     <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_24">24sp</dimen>
     <dimen name="text_size_30">30sp</dimen>
 
     //margin
@@ -31,7 +32,6 @@
     <dimen name="height_36">36dp</dimen>
     <dimen name="height_50">50dp</dimen>
     <dimen name="height_60">60dp</dimen>
-    <dimen name="height_120">120dp</dimen>
+    <dimen name="height_100">100dp</dimen>
     <dimen name="height_180">180dp</dimen>
-    <dimen name="height_290">290dp</dimen>
 </resources>
