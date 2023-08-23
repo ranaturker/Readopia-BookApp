@@ -82,7 +82,7 @@ class DetailFragment : Fragment() {
 
             buttonRead.setOnClickListener {
                 book.id?.let { bookId ->
-                    PrefUtil.saveBookIds(bookIds = listOf(bookId))
+                    PrefUtil.saveBookId(bookId = bookId)
 
                     if (book.formats?.textHtmlUtf8 != null) {
                         val action =
