@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="background">#D8F5E6D8</color>
+    <color name="progress_bar">#F0732817</color>
+    <color name="text_author">#D3000000</color>
 </resources>

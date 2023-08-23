@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Readopia</string>
+    <string name="readopia_app_name">READOPIA</string>
+    <string name="button">button</string>
+    <string name="book_name">Book Name</string>
+    <string name="read_button">Read</string>
+    <string name="download_count">Download Count</string>
+    <string name="download_count_label">Download Count</string>
+    <string name="languages_label">Languages</string>
+    <string name="languages">Languages</string>
+    <string name="copyright_label">Copyright</string>
+    <string name="content">Content</string>
+    <string name="bookshelves">Bookshelves</string>
+    <string name="author_name">author</string>
+    <string name="book_detail_continue_button_text">Continue Reading</string>
+    <string name="your_total_readings">Your total readings: %1$s</string>
+    <string name="okay">Okay</string>
+    <string name="unknown_author">Unknown Author</string>
+    <string name="this_book_has_no_bookshelf">This Book Has No Bookshelf</string>
+    <string name="there_is_no_reading_page">There is no reading page.</string>
 </resources>
