@@ -3,49 +3,66 @@ package com.ranaturker.readopia.util
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.SharedPreferences.Editor
-import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 object PrefUtil {
-    lateinit var pref: SharedPreferences
 
-    private fun getEditor(): Editor {
-        return pref.edit()
-    }
+    private lateinit var pref: SharedPreferences
+    private lateinit var gson: Gson
+
+    private const val PREF_NAME = "Readopia"
+    private const val SCROLL_POSITION_PREFIX = "scrollPosition_"
+    private const val BOOK_IDS_KEY = "bookIds"
+
+    private val editor: Editor
+        get() = pref.edit()
 
     fun initPref(context: Context) {
-        pref = context.getSharedPreferences("readopia", Context.MODE_PRIVATE)
+        pref = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        gson = Gson()
     }
 
-    fun isReading(id: Int): Boolean {
-        Log.d("bookId", "id: $id")
-        val bookIds = pref.getString(BOOK_KEY, null) ?: return false
-        val listType = object : TypeToken<List<Int>>() {}.type
-        val bookIdList: MutableList<Int> = Gson().fromJson(bookIds, listType)
-        Log.d("bookId", bookIdList.joinToString())
-        return bookIdList.contains(id)
-    }
+    private fun getBookIds(): List<Int> {
+        val bookIdsJson = pref.getString(BOOK_IDS_KEY, null)
 
-    fun setBookPref(id: Int) {
-        if (!pref.contains(BOOK_KEY)) {
-            val bookIds = mutableListOf<Int>()
-            bookIds.add(id)
-            val bookIdsJson = Gson().toJson(bookIds)
-            getEditor().putString(BOOK_KEY, bookIdsJson)
-            getEditor().apply()
+        return if (bookIdsJson != null) {
+            gson.fromJson(bookIdsJson, object : TypeToken<List<Int>>() {}.type)
         } else {
-            val bookIds = pref.getString(BOOK_KEY, "")
-            val listType = object : TypeToken<List<String>>() {}.type
-            val bookIdList: MutableList<Int> = Gson().fromJson(bookIds, listType)
-            bookIdList.add(id)
-            val bookIdsJson = Gson().toJson(bookIds)
-            getEditor().putString(BOOK_KEY, bookIdsJson)
-            getEditor().apply()
+            emptyList()
         }
     }
 
-    const val BOOK_KEY = "books"
-}
+    fun saveBookIds(bookIds: List<Int>) {
+        val existingBookIds = getBookIds().toMutableList()
+        existingBookIds.addAll(bookIds)
 
-data class BookState(val id: Int)
+        val bookIdsJson = gson.toJson(existingBookIds)
+        editor.putString(this.BOOK_IDS_KEY, bookIdsJson).apply()
+    }
+
+    fun checkBook(id: Int): Boolean {
+        val bookIdsJson = pref.getString(this.BOOK_IDS_KEY, null)
+        if (bookIdsJson != null) {
+            val listType = object : TypeToken<List<Int>>() {}.type
+            val bookIds = gson.fromJson<List<Int>>(bookIdsJson, listType)
+            return bookIds.contains(id)
+        }
+        return false
+    }
+
+    fun getSavedBooksCount(): Int {
+        val bookIdsJson = pref.getString(this.BOOK_IDS_KEY, null) ?: return  0
+        val listType = object : TypeToken<List<Int>>() {}.type
+        val bookIds = gson.fromJson<List<Int>>(bookIdsJson, listType)
+        return bookIds.size
+    }
+
+    fun saveBookScrollPosition(bookId: Int, scrollPosition: Int) {
+        editor.putInt(SCROLL_POSITION_PREFIX + bookId, scrollPosition).apply()
+    }
+
+    fun getBookScrollPosition(bookId: Int): Int {
+        return pref.getInt(SCROLL_POSITION_PREFIX + bookId, 0)
+    }
+}

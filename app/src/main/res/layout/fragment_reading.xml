@@ -9,21 +9,22 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_36"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/margin_8"
-        android:layout_marginTop="@dimen/margin_8"
         android:background="@color/white"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toTopOf="@id/web_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="?android:attr/homeAsUpIndicator" />
 
     <WebView
         android:id="@+id/web_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/margin_32" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progress"
@@ -58,4 +59,5 @@
             tools:text="text" />
 
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

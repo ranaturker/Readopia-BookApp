@@ -12,4 +12,5 @@
     <string name="content">Content</string>
     <string name="bookshelves">Bookshelves</string>
     <string name="author_name">author</string>
+    <string name="book_detail_continue_button_text">Continue Reading</string>
 </resources>

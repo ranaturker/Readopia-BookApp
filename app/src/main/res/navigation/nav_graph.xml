@@ -36,6 +36,9 @@
         <argument
             android:name="url"
             app:argType="string" />
+        <argument
+            android:name="bookId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"

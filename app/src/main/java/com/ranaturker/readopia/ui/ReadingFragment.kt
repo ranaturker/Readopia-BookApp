@@ -13,6 +13,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ranaturker.readopia.R
 import com.ranaturker.readopia.databinding.FragmentReadingBinding
+import com.ranaturker.readopia.util.PrefUtil
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class ReadingFragment : Fragment() {
     private lateinit var binding: FragmentReadingBinding
@@ -40,15 +45,27 @@ class ReadingFragment : Fragment() {
 
     private fun loadWebView(url: String) {
         with(binding.webView) {
-            settings.javaScriptEnabled = true
             loadUrl(url)
+
+            setOnScrollChangeListener { _, _, scrollY, _, _ ->
+                PrefUtil.saveBookScrollPosition(args.bookId, scrollY)
+            }
 
             webViewClient = object : WebViewClient() {
                 override fun shouldOverrideUrlLoading(view: WebView?, url: String): Boolean {
                     view?.loadUrl(url)
                     return true
                 }
+
+                override fun onPageFinished(view: WebView?, url: String?) {
+                    val scrollPosition = PrefUtil.getBookScrollPosition(args.bookId)
+                    CoroutineScope(Dispatchers.Main).launch {
+                        delay(500)
+                        view?.scrollTo(0, scrollPosition)
+                    }
+                }
             }
+
             webChromeClient = object : WebChromeClient() {
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
                     binding.progress.progress = newProgress

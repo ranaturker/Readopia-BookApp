@@ -14,7 +14,6 @@ import coil.load
 import com.ranaturker.readopia.R
 import com.ranaturker.readopia.databinding.FragmentDetailBinding
 import com.ranaturker.readopia.network.Result
-import com.ranaturker.readopia.util.BookState
 import com.ranaturker.readopia.util.PrefUtil
 
 class DetailFragment : Fragment() {
@@ -53,9 +52,9 @@ class DetailFragment : Fragment() {
                         if (shelves.isNotEmpty()) {
                             shelves.joinToString(",")
                         } else {
-                            "This book has no bookshelf"
+                            "This Book Has No Bookshelf"
                         }
-                    } ?: "This book has no bookshelf"
+                    } ?: "This Book Has No Bookshelf"
                 with(binding) {
                     textViewBookName.text = book.title
                     textViewAuthor.text = authorName
@@ -71,32 +70,38 @@ class DetailFragment : Fragment() {
                         placeholder(R.drawable.img_book_wallpaper)
                         error(R.drawable.ic_error_image)
                     }
+
                     book.id?.let {
-                        if (PrefUtil.isReading(id = it)){
-                            buttonRead.text = "continue reading"
+                        if (PrefUtil.checkBook(id = it)) {
+                            buttonRead.text = getString(R.string.book_detail_continue_button_text)
                         }
                     }
 
                     buttonRead.setOnClickListener {
-                        book.id?.let { bookId -> PrefUtil.setBookPref(id= bookId) }
-                        if (book.formats?.textHtmlUtf8 != null) {
-                            val action =
-                                DetailFragmentDirections.actionDetailFragmentToReadingFragment(
-                                    book.formats.textHtmlUtf8
-                                )
-                            findNavController().navigate(action)
-                        } else if (book.formats?.textHtml != null) {
-                            val action =
-                                DetailFragmentDirections.actionDetailFragmentToReadingFragment(
-                                    book.formats.textHtml
-                                )
-                            findNavController().navigate(action)
-                        } else {
-                            Toast.makeText(
-                                requireContext(),
-                                "There is no reading page.",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                        book.id?.let { bookId ->
+                            PrefUtil.saveBookIds(bookIds = listOf(bookId))
+
+                            if (book.formats?.textHtmlUtf8 != null) {
+                                val action =
+                                    DetailFragmentDirections.actionDetailFragmentToReadingFragment(
+                                        book.formats.textHtmlUtf8,
+                                        bookId
+                                    )
+                                findNavController().navigate(action)
+                            } else if (book.formats?.textHtml != null) {
+                                val action =
+                                    DetailFragmentDirections.actionDetailFragmentToReadingFragment(
+                                        book.formats.textHtml,
+                                        bookId
+                                    )
+                                findNavController().navigate(action)
+                            } else {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "There is no reading page.",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
                     }
                 }
