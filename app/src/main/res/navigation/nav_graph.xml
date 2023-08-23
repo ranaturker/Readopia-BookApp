@@ -3,20 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashScreenFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.ranaturker.readopia.ui.ListFragment"
+        android:name="com.ranaturker.readopia.ui.list.ListFragment"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list">
         <action
-            android:id="@+id/action_listFragment_to_detailFragment"
+            android:id="@+id/to_detailFragment"
             app:destination="@id/detailFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.ranaturker.readopia.ui.DetailFragment"
+        android:name="com.ranaturker.readopia.ui.detail.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail">
         <!--suppress NavigationFile -->
@@ -24,12 +25,13 @@
             android:name="bookId"
             app:argType="integer" />
         <action
-            android:id="@+id/action_detailFragment_to_readingFragment"
+            android:id="@+id/to_readingFragment"
             app:destination="@id/readingFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/readingFragment"
-        android:name="com.ranaturker.readopia.ui.ReadingFragment"
+        android:name="com.ranaturker.readopia.ui.reading.ReadingFragment"
         android:label="fragment_reading"
         tools:layout="@layout/fragment_reading">
         <!--suppress NavigationFile -->
@@ -40,13 +42,14 @@
             android:name="bookId"
             app:argType="integer" />
     </fragment>
+
     <fragment
-        android:id="@+id/splashScreenFragment"
-        android:name="com.ranaturker.readopia.ui.SplashScreenFragment"
+        android:id="@+id/splashFragment"
+        android:name="com.ranaturker.readopia.ui.splash.SplashFragment"
         android:label="fragment_splash_screen"
-        tools:layout="@layout/fragment_splash_screen">
+        tools:layout="@layout/fragment_splash">
         <action
-            android:id="@+id/action_splashScreenFragment_to_listFragment"
+            android:id="@+id/to_listFragment"
             app:destination="@id/listFragment" />
     </fragment>
 </navigation>

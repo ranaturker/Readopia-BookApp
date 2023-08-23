@@ -35,10 +35,12 @@ object PrefUtil {
 
     fun saveBookIds(bookIds: List<Int>) {
         val existingBookIds = getBookIds().toMutableList()
-        existingBookIds.addAll(bookIds)
+        if(!existingBookIds.contains(bookIds[0])){
+            existingBookIds.addAll(bookIds)
 
-        val bookIdsJson = gson.toJson(existingBookIds)
-        editor.putString(this.BOOK_IDS_KEY, bookIdsJson).apply()
+            val bookIdsJson = gson.toJson(existingBookIds)
+            editor.putString(this.BOOK_IDS_KEY, bookIdsJson).apply()
+        }
     }
 
     fun checkBook(id: Int): Boolean {

@@ -1,14 +1,8 @@
-package com.ranaturker.readopia.network
+package com.ranaturker.readopia.network.model
 
 import com.google.gson.annotations.SerializedName
 
 data class Books(
-    @SerializedName("count")
-    val count: Int? = null,
-    @SerializedName("next")
-    val next: String? = null,
-    @SerializedName("previous")
-    val previous: Any? = null,
     @SerializedName("results")
     val results: List<Result>? = null
 )
@@ -23,10 +17,6 @@ data class Formats(
 )
 
 data class Author(
-    @SerializedName("birth_year")
-    val birthYear: Int? = null,
-    @SerializedName("death_year")
-    val deathYear: Int? = null,
     @SerializedName("name")
     val name: String? = null
 )
@@ -46,17 +36,9 @@ data class Result(
     val id: Int? = null,
     @SerializedName("languages")
     val languages: List<String?>? = null,
-    @SerializedName("media_type")
-    val mediaType: String? = null,
     @SerializedName("subjects")
     val subjects: List<String?>? = null,
     @SerializedName("title")
     val title: String? = null,
-    @SerializedName("translators")
-    val translators: List<Translator?>? = null
 )
 
-data class Translator(
-    @SerializedName("name")
-    val name: String? = null
-)

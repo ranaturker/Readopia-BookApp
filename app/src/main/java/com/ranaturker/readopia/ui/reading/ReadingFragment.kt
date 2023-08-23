@@ -1,4 +1,4 @@
-package com.ranaturker.readopia.ui
+package com.ranaturker.readopia.ui.reading
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,10 +8,8 @@ import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import androidx.appcompat.widget.Toolbar
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.ranaturker.readopia.R
 import com.ranaturker.readopia.databinding.FragmentReadingBinding
 import com.ranaturker.readopia.util.PrefUtil
 import kotlinx.coroutines.CoroutineScope
@@ -20,6 +18,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class ReadingFragment : Fragment() {
+
     private lateinit var binding: FragmentReadingBinding
     private val args: ReadingFragmentArgs by navArgs()
 
@@ -34,13 +33,16 @@ class ReadingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-        val navController = findNavController()
+
+        setListeners()
+
+        loadWebView(url = args.url)
+    }
+
+    private fun setListeners() = with(binding) {
         toolbar.setNavigationOnClickListener {
-            navController.navigateUp()
+            findNavController().navigateUp()
         }
-        val url = args.url
-        loadWebView(url)
     }
 
     private fun loadWebView(url: String) {
@@ -52,6 +54,7 @@ class ReadingFragment : Fragment() {
             }
 
             webViewClient = object : WebViewClient() {
+
                 override fun shouldOverrideUrlLoading(view: WebView?, url: String): Boolean {
                     view?.loadUrl(url)
                     return true
@@ -59,6 +62,7 @@ class ReadingFragment : Fragment() {
 
                 override fun onPageFinished(view: WebView?, url: String?) {
                     val scrollPosition = PrefUtil.getBookScrollPosition(args.bookId)
+
                     CoroutineScope(Dispatchers.Main).launch {
                         delay(500)
                         view?.scrollTo(0, scrollPosition)
@@ -69,6 +73,7 @@ class ReadingFragment : Fragment() {
             webChromeClient = object : WebChromeClient() {
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
                     binding.progress.progress = newProgress
+
                     if (newProgress == 100) {
                         binding.progress.visibility = View.GONE
                     }

@@ -1,4 +1,4 @@
-package com.ranaturker.readopia.ui
+package com.ranaturker.readopia.ui.splash
 
 import android.os.Bundle
 import android.os.Handler
@@ -10,19 +10,20 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.ranaturker.readopia.R
 
-class SplashScreenFragment : Fragment() {
+class SplashFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_splash_screen, container, false)
+        return inflater.inflate(R.layout.fragment_splash, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToListFragment())
+            findNavController()
+                .navigate(SplashFragmentDirections.toListFragment())
         }, 3461)
     }
 }

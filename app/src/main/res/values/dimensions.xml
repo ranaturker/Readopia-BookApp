@@ -3,6 +3,7 @@
     //text size
     <dimen name="text_size_8">8sp</dimen>
     <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
     <dimen name="text_size_16">16sp</dimen>
     <dimen name="text_size_24">24sp</dimen>
     <dimen name="text_size_30">30sp</dimen>
@@ -24,7 +25,6 @@
     //width
     <dimen name="width_20">20dp</dimen>
     <dimen name="width_120">120dp</dimen>
-    <dimen name="width_350">350dp</dimen>
 
     //height
     <dimen name="height_20">20dp</dimen>
