@@ -46,7 +46,7 @@ class DetailFragment : Fragment() {
 
     private fun setViews(book: Result?) = with(binding) {
         if (book != null) {
-            val authorName = book.authors?.get(0)?.name ?: "Unknown Author"
+            val authorName = book.authors?.get(0)?.name ?:  getString(R.string.unknown_author)
             val languages = book.languages?.joinToString()
             val subjects = book.subjects?.take(4)
             val bookshelf =
