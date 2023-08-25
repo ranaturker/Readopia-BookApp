@@ -2,6 +2,7 @@ package com.ranaturker.readopia.network.model
 
 import com.google.gson.annotations.SerializedName
 
+//Response model
 data class Books(
     @SerializedName("results")
     val results: List<Result>? = null
